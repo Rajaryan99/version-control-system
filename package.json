@@ -1,0 +1,22 @@
+{
+  "name": "version-control-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajaryan99/version-control-system.git"
+  },
+  "keywords": [],
+  "author": "Raj Aryan Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rajaryan99/version-control-system/issues"
+  },
+  "homepage": "https://github.com/Rajaryan99/version-control-system#readme",
+  "description": ""
+}
