@@ -9,6 +9,7 @@ import { addRepo } from './controllers/add.js'
 import { commit } from './controllers/commit.js'
 import { pushRepo } from './controllers/push.js'
 import { pullRepo } from './controllers/pull.js'
+import { revertRepo } from './controllers/revert.js'
 
 const app = express();
 
@@ -24,7 +25,7 @@ const connectDB = async () => {
         app.listen(port, () => {
             console.log(`server is running on http://localhost:${port}`)
         })
-        
+
     } catch (error) {
         console.log(error)
     }
@@ -48,6 +49,12 @@ yargs(hideBin(process.argv))
     }, commit)
     .command('push', 'push commit to S3', {}, pushRepo)
     .command('pull', "Pull commit from S3", {}, pullRepo)
+    .command('revert <commitID>', "revert to specific commit ", (yargs) => {
+        yargs.positional('commitID', {
+            describe: 'commit ID to revert to',
+            type: "string"
+        })
+    }, revertRepo)
     .demandCommand(1, "You nees at least one command")
     .help().argv;
 
