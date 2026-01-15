@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers' //hideBin() removes the default Node.js entries (node path and script path) from process.argv, so yargs only receives the actual user-typed command-line arguments.
 import { intiRepo } from './controllers/init.js'
+import { addRepo } from './controllers/add.js'
 
 const app = express();
 
@@ -35,7 +36,7 @@ yargs(hideBin(process.argv))
             describe: "Fileto add to the staging area",
             type: "string"
         });
-    },)
+    }, addRepo)
     .demandCommand(1, "You nees at least one command")
     .help().argv;
 
