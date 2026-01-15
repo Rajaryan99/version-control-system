@@ -7,6 +7,7 @@ import { hideBin } from 'yargs/helpers' //hideBin() removes the default Node.js 
 import { intiRepo } from './controllers/init.js'
 import { addRepo } from './controllers/add.js'
 import { commit } from './controllers/commit.js'
+import { pushRepo } from './controllers/push.js'
 
 const app = express();
 
@@ -38,7 +39,13 @@ yargs(hideBin(process.argv))
             type: "string"
         });
     }, addRepo)
-    .command('commit', "files are ready to push", {}, commit)
+    .command('commit <message>', "files are ready to push", (yargs) => {
+        yargs.positional('message', {
+            describe: 'add a message for commit',
+            type: 'string'
+        })
+    }, commit)
+    .command('push', 'push commit to S3', {}, pushRepo)
     .demandCommand(1, "You nees at least one command")
     .help().argv;
 
