@@ -8,6 +8,7 @@ import { intiRepo } from './controllers/init.js'
 import { addRepo } from './controllers/add.js'
 import { commit } from './controllers/commit.js'
 import { pushRepo } from './controllers/push.js'
+import { pullRepo } from './controllers/pull.js'
 
 const app = express();
 
@@ -46,6 +47,7 @@ yargs(hideBin(process.argv))
         })
     }, commit)
     .command('push', 'push commit to S3', {}, pushRepo)
+    .command('pull', "Pull commit from S3", {}, pullRepo)
     .demandCommand(1, "You nees at least one command")
     .help().argv;
 
