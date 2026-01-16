@@ -4,9 +4,6 @@ import path from 'path'
 const fs = FS.promises;
 
 
-
-
-
 export async function intiRepo() {
 
     const repoPath = path.resolve(process.cwd(), '.gitsh')
@@ -26,6 +23,8 @@ export async function intiRepo() {
     } catch (error) {
         console.log('Error initialising repository', error)
     }
+
+    
 }
 
 // export default { intiRepo }
