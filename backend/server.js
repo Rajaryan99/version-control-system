@@ -50,7 +50,11 @@ yargs(hideBin(process.argv))
             describe: 'add a message for commit',
             type: 'string'
         })
-    }, commit)
+    },
+        (argv) => {
+            commit(argv.message);
+        }
+    )
     .command('push', 'push commit to S3', {}, pushRepo)
     .command('pull', "Pull commit from S3", {}, pullRepo)
     .command('revert <commitID>', "revert to specific commit ", (yargs) => {
