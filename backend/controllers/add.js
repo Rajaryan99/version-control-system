@@ -14,8 +14,8 @@ export async function addRepo(filePath) {
 
         await fs.mkdir(stagingPath, { recursive: true })
         const fileName = path.basename(filePath);
-
-        
+        await fs.copyFile(filePath, path.join(stagingPath, fileName))
+        console.log(`File ${fileName} added to staging area!`)
         
     } catch (error) {
         console.log('Error in adding file : ', error)
