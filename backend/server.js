@@ -35,12 +35,16 @@ connectDB();
 
 yargs(hideBin(process.argv))
     .command('init', 'Initialise a new repository', {}, intiRepo)
-    .command('add <filr>', "add file to the repository", (yargs) => {
+    .command('add <file>', "add file to the repository", (yargs) => {
         yargs.positional('file', {
             describe: "Fileto add to the staging area",
             type: "string"
         });
-    }, addRepo)
+    },
+        (argv) => {
+            addRepo(argv.file);
+        }
+    )
     .command('commit <message>', "files are ready to push", (yargs) => {
         yargs.positional('message', {
             describe: 'add a message for commit',
