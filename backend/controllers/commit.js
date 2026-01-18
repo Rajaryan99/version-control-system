@@ -13,6 +13,10 @@ export async function commit(message) {
     try {
 
         const commitID = uuidv4();
+        const commitDir = path.join(commitPath, commitID)
+        await fs.mkdir(commitDir, { recursive: true })
+        
+        
         
     } catch (error) {
 
