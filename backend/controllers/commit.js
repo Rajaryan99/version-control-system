@@ -16,8 +16,17 @@ export async function commit(message) {
         const commitDir = path.join(commitPath, commitID)
         await fs.mkdir(commitDir, { recursive: true })
         
+        const files = await fs.readdir(stagePath);
+        for (const file of files) {
+            await fs.copyFile(
+                path.join(stagePath, file),
+                path.join(commitDir, file)
+            )
+        }
         
+        await fs.writeFile(path.join(commitDir, 'commit.json'), JSON.stringify({ message, data: new Date().toISOString() }))
         
+        console.log(`Commit ${commitID} created with message : ${message}`)
     } catch (error) {
 
         console.log('Error in commiting file : ', error)
