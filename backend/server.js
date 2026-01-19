@@ -34,7 +34,7 @@ const connectDB = async () => {
 connectDB();
 
 yargs(hideBin(process.argv))
-    .command('start', 'Starting the server', {}, startServer)
+    .command("st", "Starting the server", {}, startServer)
     .command('init', 'Initialise a new repository', {}, intiRepo)
     .command('add <file>', "add file to the repository", (yargs) => {
         yargs.positional('file', {
@@ -72,5 +72,5 @@ yargs(hideBin(process.argv))
     .help().argv;
 
 function startServer() {
-        console.log('server started')
+        console.log('server logic callled')
     }
