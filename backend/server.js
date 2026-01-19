@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import mongoose from 'mongoose';
+import http from 'http'
+import bodyParser from 'body-parser';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers' //hideBin() removes the default Node.js entries (node path and script path) from process.argv, so yargs only receives the actual user-typed command-line arguments.
 import { intiRepo } from './controllers/init.js'
@@ -15,6 +17,7 @@ const app = express();
 
 const port = process.env.PORT;
 
+app.use(cors());
 
 const connectDB = async () => {
     try {
@@ -31,7 +34,6 @@ const connectDB = async () => {
     }
 }
 
-connectDB();
 
 yargs(hideBin(process.argv))
     .command("st", "Starting the server", {}, startServer)
@@ -71,6 +73,7 @@ yargs(hideBin(process.argv))
     .demandCommand(1, "You nees at least one command")
     .help().argv;
 
+ 
 function startServer() {
-        console.log('server logic callled')
-    }
+    connectDB();
+}
