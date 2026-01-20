@@ -46,6 +46,16 @@ const connectDB = async () => {
             methods: ['GET', 'POST']
         })
 
+        io.on('connection', (socket) => {
+            socket.on('jonRoom', (userID) => {
+                user = userID;
+                console.log('======');
+                console.log(user);
+                console.log('======')
+                socket.join(userID)
+            })
+        })
+
         
 
     } catch (error) {
