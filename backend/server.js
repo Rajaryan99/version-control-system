@@ -38,7 +38,14 @@ const connectDB = async () => {
             res.send('hellow World')
         })
 
+        let user  ='test'
+
         const httpServer = http.createServer(app);
+        const io = new Server(httpServer, {
+            cors: '*',
+            methods: ['GET', 'POST']
+        })
+
         
 
     } catch (error) {
