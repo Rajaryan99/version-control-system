@@ -33,14 +33,22 @@ const connectDB = async () => {
             console.log(`server is running on http://localhost:${port}`)
         })
 
+
+        app.get('/', (req, res) => {
+            res.send('hellow World')
+        })
+
+        const httpServer = http.createServer(app);
+        
+
     } catch (error) {
         console.log(error)
     }
 }
 
-app.get('/', (req, res) => {
-    res.send('hellow World')
-})
+
+
+
 
 
 
