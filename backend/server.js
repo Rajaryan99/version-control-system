@@ -13,55 +13,7 @@ import { commit } from './controllers/commit.js'
 import { pushRepo } from './controllers/push.js'
 import { pullRepo } from './controllers/pull.js'
 import { revertRepo } from './controllers/revert.js'
-import { Socket } from 'dgram';
 
-const app = express();
-
-const port = process.env.PORT || 3000;
-
-app.use(cors({origin: '*'}));
-app.use(bodyParser.json());
-app.use(express.json());
-
-const connectDB = async () => {
-    try {
-
-        const DB = await mongoose.connect(`${process.env.MONGODB_URL}`)
-        console.log('DB connected successfully')
-
-        app.listen(port, () => {
-            console.log(`server is running on http://localhost:${port}`)
-        })
-
-
-        app.get('/', (req, res) => {
-            res.send('hellow World')
-        })
-
-        let user  ='test'
-
-        const httpServer = http.createServer(app);
-        const io = new Server(httpServer, {
-            cors: '*',
-            methods: ['GET', 'POST']
-        })
-
-        io.on('connection', (socket) => {
-            socket.on('jonRoom', (userID) => {
-                user = userID;
-                console.log('======');
-                console.log(user);
-                console.log('======')
-                socket.join(userID)
-            })
-        })
-
-        
-
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 
 
@@ -109,5 +61,59 @@ yargs(hideBin(process.argv))
 
  
 function startServer() {
-    connectDB();
+
+    const app = express();
+
+    const port = process.env.PORT || 3000;
+
+    app.use(bodyParser.json());
+    app.use(express.json());
+
+    const mongoURI = process.env.MONGODB_URL;
+
+    mongoose
+        .connect(mongoURI)
+        .then(() => console.log('MongoDB connected!'))
+        .catch((err) => console.error('unable to connect to DB', err));
+    
+    app.use(cors({ origin: "*" }));
+    
+    app.get('/', (req, res) => {
+        res.send('hellow World')
+    })
+
+    let user = 'test'
+
+    const httpServer = http.createServer(app);
+    const io = new Server(httpServer, {
+        cors: {
+            origin: '*',
+            methods: ['GET', "POST"]
+        }
+    })
+
+
+    io.on('connection', (socket) => {
+        socket.on('jonRoom', (userID) => {
+            user = userID;
+            console.log('======');
+            console.log(user);
+            console.log('======')
+            socket.join(userID)
+        })
+    })
+
+
+
+    mongoose.connection.once("open", async () => (
+        console.log('CURD operations')
+
+        //CRUD operation
+    ))
+
+    httpServer.listen(port, () => {
+        console.log(`server is running on http://localhost:${port}`)
+    })
+
+    
 }
