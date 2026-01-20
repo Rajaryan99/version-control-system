@@ -4,6 +4,7 @@ import 'dotenv/config'
 import mongoose from 'mongoose';
 import http from 'http'
 import bodyParser from 'body-parser';
+import { Server } from 'socket.io';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers' //hideBin() removes the default Node.js entries (node path and script path) from process.argv, so yargs only receives the actual user-typed command-line arguments.
 import { intiRepo } from './controllers/init.js'
@@ -12,12 +13,15 @@ import { commit } from './controllers/commit.js'
 import { pushRepo } from './controllers/push.js'
 import { pullRepo } from './controllers/pull.js'
 import { revertRepo } from './controllers/revert.js'
+import { Socket } from 'dgram';
 
 const app = express();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({origin: '*'}));
+app.use(bodyParser.json());
+app.use(express.json());
 
 const connectDB = async () => {
     try {
@@ -33,6 +37,11 @@ const connectDB = async () => {
         console.log(error)
     }
 }
+
+app.get('/', (req, res) => {
+    res.send('hellow World')
+})
+
 
 
 yargs(hideBin(process.argv))
