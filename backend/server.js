@@ -17,10 +17,6 @@ import { revertRepo } from './controllers/revert.js'
 
 
 
-
-
-
-
 yargs(hideBin(process.argv))
     .command("st", "Starting the server", {}, startServer)
     .command('init', 'Initialise a new repository', {}, intiRepo)
