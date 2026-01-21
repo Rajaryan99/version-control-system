@@ -74,9 +74,7 @@ function startServer() {
     
     app.use(cors({ origin: "*" }));
     
-    app.get('/', (req, res) => {
-        res.send('hellow World')
-    })
+    
 
     let user = 'test'
 
