@@ -21,3 +21,12 @@ const updateUserProfile = (req, res) => {
 const deleteUserProfile = (req, res) => {
     res.send('Profile deleted')
 }
+
+export {
+    getAllUsers,
+    signup,
+    login,
+    getUserProlfile,
+    updateUserProfile,
+    deleteUserProfile
+};
