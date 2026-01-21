@@ -13,6 +13,7 @@ import { commit } from './controllers/commit.js'
 import { pushRepo } from './controllers/push.js'
 import { pullRepo } from './controllers/pull.js'
 import { revertRepo } from './controllers/revert.js'
+import { mainRouter } from './routes/main.router.js';
 
 
 
@@ -74,7 +75,7 @@ function startServer() {
     
     app.use(cors({ origin: "*" }));
     
-    
+    app.use('/', mainRouter);
 
     let user = 'test'
 
