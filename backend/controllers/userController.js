@@ -19,8 +19,27 @@ async function connectClient() {
     }
 }
 
- const signup = (req, res) => {
-    res.send('Signing in')
+ const signup = async (req, res) => {
+     const { username, email, password } = req.body;
+
+     try {
+         
+         await connectClient();
+         const db = client.db("githubclone");
+         const userCollection = db.collection('users')
+
+         const user = await userCollection.findOne({ email })
+         
+         if (email) {
+             return res.status(400).json({message: 'user already exist'})
+         }
+
+        
+        
+     } catch (error) {
+        res.status(500).json({error: 'Signup failed'})
+     }
+
 }
 
   const login = (req, res) => {
