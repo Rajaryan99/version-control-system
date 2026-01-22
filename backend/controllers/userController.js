@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
+import bcrypt, { hashSync } from 'bcryptjs'
 import { MongoClient } from 'mongodb'
 import 'dotenv/config'
 
@@ -10,10 +10,7 @@ let client;
 
 async function connectClient() {
     if (!client) {
-        client = new MongoClient(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+        client = new MongoClient(uri)
 
         await client.connect()
     }
@@ -30,14 +27,31 @@ async function connectClient() {
 
          const user = await userCollection.findOne({ email })
          
-         if (email) {
-             return res.status(400).json({message: 'user already exist'})
+         if (user) {
+             return res.status(400).json({ message: 'user already exist' })
          }
 
-        
+         const hashedPassword = await bcrypt.hash(password, 10);
+
+         const newUser = {
+             username,
+             password: hashedPassword,
+             email,
+             repositories: [],
+             followedUser: [],
+             starRepos: []
+         }
+
+         const result = await userCollection.insertOne(newUser);
+
+         const token = jwt.sign({ id: result.insertId }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" })
+         
+         res.json({token});
+         
         
      } catch (error) {
-        res.status(500).json({error: 'Signup failed'})
+         res.status(500).json({ error: 'Signup failed' })
+         console.log(error.message);
      }
 
 }
