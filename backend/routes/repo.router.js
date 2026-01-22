@@ -5,7 +5,7 @@ import repoController from '../controllers/repoController.js';
 export const repoRouter = express.Router();
 
 repoRouter.post('/repo/create', repoController.createRepository)
-repoRouter.get('/repo/allrepo', repoController.getAllRepositories)
+repoRouter.get('/repo/all', repoController.getAllRepositories)
 repoRouter.get('/repo/:id', repoController.fetchRepositoryById)
 repoRouter.get('/repo/:name', repoController.fetchRepositoryByName)
 repoRouter.get('/repo/:userID', repoController.fetchRepositoryForCurrewntUser)
