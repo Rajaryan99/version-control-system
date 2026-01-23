@@ -123,11 +123,13 @@ const getUserProlfile = async (req, res) => {
             _id: new ObjectId(currentID)
         })
 
-        res.json(user);
+        
 
         if (!user) {
             return res.status(400).json({message: "User not found :("})
         }
+
+        res.json(user);
         
          
         
