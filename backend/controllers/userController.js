@@ -19,6 +19,10 @@ async function connectClient() {
  const signup = async (req, res) => {
      const { username, email, password } = req.body;
 
+     if (!username || !email || !password) {
+         res.send('Please fill all the details')
+     }
+
      try {
          
          await connectClient();
@@ -56,8 +60,8 @@ async function connectClient() {
 
 }
 
-  const login = (req, res) => {
-    res.send('Login in')
+  const login = async (req, res) => {
+   
 }
 
 const getAllUsers = (req, res) => {
