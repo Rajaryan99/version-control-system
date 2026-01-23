@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt, { hashSync } from 'bcryptjs'
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 import 'dotenv/config'
+
 
 
 const uri = process.env.MONGODB_URL
@@ -92,20 +93,32 @@ async function connectClient() {
       }
 }
 
-const getAllUsers = (req, res) => {
-    res.res('All user fetched')
+const getAllUsers = async (req, res) => {
+    try {
+       
+        await connectClient();
+        const db = client.db('githubclone');
+        const userCollection = db.collection('users')
+
+        const users = await userCollection.find({}).toArray();
+        res.json(users);
+    
+   } catch (error) {
+        console.error('Error during fetching : ', error.message)
+        res.status(500).json({message: 'server error'})
+   }
 }
 
 
- const getUserProlfile = (req, res) => {
+ const getUserProlfile = async (req, res) => {
     res.send('Profile Fetched')
 }
 
- const updateUserProfile = (req, res) => {
+ const updateUserProfile = async (req, res) => {
     res.send('Profile Updated')
 }
 
- const deleteUserProfile = (req, res) => {
+ const deleteUserProfile = async (req, res) => {
     res.send('Profile deleted')
 }
 
