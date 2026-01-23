@@ -110,8 +110,31 @@ const getAllUsers = async (req, res) => {
 }
 
 
- const getUserProlfile = async (req, res) => {
-    res.send('Profile Fetched')
+const getUserProlfile = async (req, res) => {
+     
+    const currentID = req.params.id;
+    try {
+         
+        await connectClient();
+        const db = client.db('githubclone');
+        const userCollection = db.collection('users')
+
+        const user = await userCollection.findOne({
+            _id: new ObjectId(currentID)
+        })
+
+        res.json(user);
+
+        if (!user) {
+            return res.status(400).json({message: "User not found :("})
+        }
+        
+         
+        
+    } catch (error) {
+        console.error('Error during fetching : ', error.message)
+        res.status(500).json({ message: 'server error' })
+    }
 }
 
  const updateUserProfile = async (req, res) => {
