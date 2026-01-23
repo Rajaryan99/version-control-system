@@ -61,7 +61,22 @@ async function connectClient() {
 }
 
   const login = async (req, res) => {
-   
+      const { email, password } = req.body;
+
+      try {
+          
+          await connectClient();
+          const db = client.db('githubclone');
+          const userCollection = db.collection('users');
+
+          const user = await userCollection.findOne({ email });
+
+         
+          
+        
+      } catch (error) {
+        res.status(400).json({message: "invalid username or password"}, error)
+      }
 }
 
 const getAllUsers = (req, res) => {
