@@ -140,7 +140,29 @@ const getUserProlfile = async (req, res) => {
 }
 
 const updateUserProfile = async (req, res) => {
-     
+    const currentID = req.params.id;
+    const { email, password } = req.body;
+
+
+
+    try {
+        await connectClient();
+        const db = client.db('githubclone');
+        const userCollection = db.collection('users')
+
+        let updatedFields = { email }
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            updatedFields.password = hashedPassword;
+        }
+
+        
+
+
+        
+    } catch (error) {
+        console.error('updating details error', error.message)
+    }
 }
 
  const deleteUserProfile = async (req, res) => {
