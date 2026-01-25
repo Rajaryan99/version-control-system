@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt, { hashSync } from 'bcryptjs'
-import { MongoClient, ObjectId } from 'mongodb'
+import { MongoClient, ObjectId, ReturnDocument } from 'mongodb'
 import 'dotenv/config'
 
 
@@ -156,10 +156,16 @@ const updateUserProfile = async (req, res) => {
             updatedFields.password = hashedPassword;
         }
 
-        
+        const result = await userCollection.findOneAndUpdate({
+            _id: new ObjectId(currentID)
 
+        }, {$set: updatedFields}, {ReturnDocument: 'after'})
 
+        if (!result.value) {
+            return res.status(404).res.json({message: 'User not found'})
+        }
         
+        res.send(result.value);
     } catch (error) {
         console.error('updating details error', error.message)
     }
