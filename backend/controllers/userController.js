@@ -129,7 +129,7 @@ const getUserProlfile = async (req, res) => {
             return res.status(400).json({message: "User not found :("})
         }
 
-        res.json(user);
+        res.json(user, {message: "profile fetached!"});
         
          
         
@@ -139,8 +139,8 @@ const getUserProlfile = async (req, res) => {
     }
 }
 
- const updateUserProfile = async (req, res) => {
-    res.send('Profile Updated')
+const updateUserProfile = async (req, res) => {
+     
 }
 
  const deleteUserProfile = async (req, res) => {
