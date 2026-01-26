@@ -160,7 +160,7 @@ const updateUserProfile = async (req, res) => {
         }, {$set: updatedFields}, {ReturnDocument: 'after'})
 
         if (!result.value) {
-            return res.status(404).res.json({message: 'User not found'})
+            return res.status(404).json({message: 'User not found'})
         }
         
         res.send(result.value);
