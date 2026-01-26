@@ -170,7 +170,30 @@ const updateUserProfile = async (req, res) => {
 }
 
 const deleteUserProfile = async (req, res) => {
-  
+    const currentID = req.params.id;
+
+    try {
+        await connectClient();
+        const db = client.db('githubclone');
+        const userCollection = db.collection('users');
+
+        const result = await userCollection.deleteOne({
+            _id: new ObjectId(currentID)
+        })
+
+
+        if (result.deleteCount == 0) {
+            return res.status(404).res.json({ message: 'User not found' })
+        }
+
+        res.json({ message: 'User Profile deleted' })
+
+
+
+    } catch (error) {
+
+    }
+
 }
 
  export default {
