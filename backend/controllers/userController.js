@@ -143,8 +143,6 @@ const updateUserProfile = async (req, res) => {
     const currentID = req.params.id;
     const { email, password } = req.body;
 
-
-
     try {
         await connectClient();
         const db = client.db('githubclone');
@@ -171,8 +169,8 @@ const updateUserProfile = async (req, res) => {
     }
 }
 
- const deleteUserProfile = async (req, res) => {
-    res.send('Profile deleted')
+const deleteUserProfile = async (req, res) => {
+  
 }
 
  export default {
