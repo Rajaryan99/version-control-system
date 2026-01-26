@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import Repository from '../models/repoModel.js'
-import issue from '../models/issueModel.js'
-import user from '../models/userModel.js'
+import { Repository } from '../models/repoModel.js'
+import { Issue } from '../models/issueModel.js'
+import { User } from '../models/userModel.js'
 
 
 const createRepository = async (req, res) => {
@@ -12,6 +12,23 @@ const createRepository = async (req, res) => {
         if (!name) {
             return res.status(404).json({Error: "Repository name is required!!"})
         }
+
+        if (!mongoose.Types.ObjectId.isValid(owner)) {
+            return res.status(404).json({ Error: "Invalid user ID" })
+
+        }
+
+        const newRepository = new Repository({
+            name,
+            description,
+            visibility,
+            content,
+            owner,
+            issues
+        });
+
+        const result = await newRepository.save();
+        res.status(201).json({message:"Repository Created", repositoryID: result._id})
         
     } catch (error) {
         console.error('Error during repository creation :', error.message)
