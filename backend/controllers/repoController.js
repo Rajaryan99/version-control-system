@@ -43,10 +43,6 @@ const getAllRepositories = async (req, res) => {
         const repo = await Repository.find({}).populate("owner").populate("issues");
 
         res.json(repo);
-
-
-
-
         
     } catch (error) {
         console.error('Error during  fetching repository  :', error.message)
@@ -55,7 +51,25 @@ const getAllRepositories = async (req, res) => {
 }
 
 const fetchRepositoryById = async (req, res) => {
-    res.send(' Repository detailed fetched!')
+
+    const repoID = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(repoID)) {
+        return res.status(400).json({ message: 'Invalid repository ID' });
+    }
+
+    try {
+
+        const repo = await Repository.findById({ _id: repoID }).populate("owner").populate('issues');
+        if (!repo) {
+            return res.status(404).json({ message: 'Repository not found' });
+        }
+        
+        res.json(repo);
+    } catch (error) {
+        console.error('Error during  fetching repository by ID  :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 const fetchRepositoryByName = async (req, res) => {
