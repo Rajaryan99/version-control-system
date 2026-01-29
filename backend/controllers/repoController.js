@@ -41,7 +41,9 @@ const getAllRepositories = async (req, res) => {
     try {
 
         const repo = await Repository.find({}).populate("owner").populate("issues");
-        
+
+        res.json(repo);
+
 
 
 
