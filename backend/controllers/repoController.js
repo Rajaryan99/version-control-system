@@ -73,7 +73,23 @@ const fetchRepositoryById = async (req, res) => {
 }
 
 const fetchRepositoryByName = async (req, res) => {
-    res.send(' Repository detailed by name fetched!')
+
+    const {name} = req.params;
+
+    
+
+    try {
+
+        const repo = await Repository.find({ name }).populate("owner").populate('issues');
+        if (!repo) {
+            return res.status(404).json({ message: 'Repository not found' });
+        }
+
+        res.json(repo);
+    } catch (error) {
+        console.error('Error during  fetching repository by name  :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 const fetchRepositoryForCurrewntUser = async (req, res) => {
