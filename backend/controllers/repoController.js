@@ -168,7 +168,22 @@ const toggleVisbilityById = async (req, res) => {
 
 
 const deleteRepositoryById = async (req, res) => {
-    res.send(' Repository deleted!')
+    const { id } = req.params;
+
+    try {
+
+        const repo = await Repository.findByIdAndDelete(id);
+        if (!repo) {
+            return res.status(404).json({ error: "Repository not found" })
+        }
+
+        res.json({message:"Repository deleted successfully!"})
+
+        
+    } catch (error) {
+        console.error('Error during  deleteing  repository   :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 export default {
