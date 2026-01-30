@@ -56,7 +56,22 @@ const updateIssueById = async (req, res) => {
 }
 
 const deleteIssueById = async (req, res) => {
-    res.send('Issue deleted')
+    const { id } = req.params;
+
+    try {
+
+        const issue = await Issue.findByIdAndDelete(id);
+        if (!issue) {
+            return res.status(404).json({ message: "issue not Found" })
+
+        }
+
+        res.status(200).json({message: "Issue deleted"})
+        
+    } catch (error) {
+        console.error('Error during deleting  issue   :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 const getAllIssue = async (req, res) => {
