@@ -35,7 +35,7 @@ const updateIssueById = async (req, res) => {
 
     try {
 
-        const issue = await Issue.findById(id);
+        let  issue = await Issue.findById(id);
         if (!issue) {
             return res.status(404).json({message: "issue not Found"})
         }
@@ -75,11 +75,25 @@ const deleteIssueById = async (req, res) => {
 }
 
 const getAllIssue = async (req, res) => {
-    res.send('all issue fetched')
+    const { id } = req.params;
+    try {
+
+        const issues = await Issue.find({ repository: id })
+        
+        if (!issues) {
+            return res.status(404).json({ message: "issue not Found" })
+
+        }
+        res.status(200).json({Message: 'All issue Fetched'}, issues)
+        
+    } catch (error) {
+        console.error('Error during fetching all  issue   :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 const getIssueById = async (req, res) => {
-    res.send('get issue details')
+    const 
 }
 
 export default {
