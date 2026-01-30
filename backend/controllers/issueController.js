@@ -93,7 +93,23 @@ const getAllIssue = async (req, res) => {
 }
 
 const getIssueById = async (req, res) => {
-    const 
+    const { id } = req.params;
+
+    try {
+
+        const issue = await Issue.findById(id);
+
+        if (!issue) {
+            return res.status(404).json({ message: "issue not Found" })
+
+        }
+
+        res.status(200).json({message: "Issue fetached "})
+        
+    } catch (error) {
+        console.error('Error during fetching all  issue bu id   :', error.message)
+        res.status(500).send('Server error')
+    }
 }
 
 export default {
