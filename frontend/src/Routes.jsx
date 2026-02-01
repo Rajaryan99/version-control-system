@@ -14,7 +14,7 @@ import Login from './components/auth/Login.jsx'
 //auth Context
 import { useAuth } from "./authContext.jsx";
 
-const PeojectRoutes = () => {
+const ProjectRoutes = () => {
 
     const { currentUser, setCurrentUser } = useAuth();
     const navigate = useNavigate();
@@ -33,5 +33,28 @@ const PeojectRoutes = () => {
         if (userIdFromStorage && window.location.pathname == '/auth') {
             navigate('/')
         }
-    },[currentUser, navigate, setCurrentUser])
+    }, [currentUser, navigate, setCurrentUser])
+    
+    let element = useRoutes([
+        {
+            path: '/',
+            element: <Dashboard/>
+        },
+        {
+            path: '/auth',
+            element: <Login/>
+        },
+        {
+            path: '/signup',
+            element: <Signup/>
+        },
+        {
+            path: '/profile',
+            element: <Profile/>
+        },
+    ])
+
+    return element;
 }
+
+export default ProjectRoutes;
