@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, useRoutes } from 'react-router-dom';
+import { useEffect } from "react";
 
 
 // pages list
@@ -10,3 +11,27 @@ import Signup from './components/auth/Signup.jsx';
 import Login from './components/auth/Login.jsx'
 
 
+//auth Context
+import { useAuth } from "./authContext.jsx";
+
+const PeojectRoutes = () => {
+
+    const { currentUser, setCurrentUser } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userIdFromStorage = localStorage.getItem('userId');
+
+        if (userIdFromStorage && !currentUser) {
+            setCurrentUser(userIdFromStorage)
+        }
+
+        if (!userIdFromStorage && ['/auth', '/signup'].includes(window.location.pathname)) {
+            navigate('/auth')
+        }
+
+        if (userIdFromStorage && window.location.pathname == '/auth') {
+            navigate('/')
+        }
+    },[currentUser, navigate, setCurrentUser])
+}
