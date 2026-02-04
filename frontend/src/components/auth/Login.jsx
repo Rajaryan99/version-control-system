@@ -12,12 +12,12 @@ export default function Login() {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     setCurrentUser(null)
-  })
+  }, [])
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth()
+  const {  setCurrentUser } = useAuth()
 
 
   const handlelogin = async (e) => {
@@ -38,7 +38,7 @@ export default function Login() {
       setCurrentUser(res.data.userId);
       setLoading(false);
 
-      window.location.herf = '/'
+      window.location.href = '/'
 
 
     } catch (error) {

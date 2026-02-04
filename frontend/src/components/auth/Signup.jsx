@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './auth.css'
 import logo from '../../assets/github-mark-white.svg'
-import { useAuth} from '../../authContext.jsx'
-import {Link} from 'react-router-dom'
+import { useAuth } from '../../authContext.jsx'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
 
@@ -11,6 +11,8 @@ export default function Signup() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const { setCurrentUser } = useAuth();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -30,8 +32,8 @@ export default function Signup() {
       setCurrentUser(res.data.userId);
       setLoading(false);
 
-      window.location.herf = '/'
-      
+      window.location.href = "/"
+
     } catch (error) {
       console.error('Signup error', error.message);
       alert("Signup Failed!")
@@ -42,14 +44,14 @@ export default function Signup() {
   return (
     <div className='main'>
 
-      <div className="gitLogo"> 
+      <div className="gitLogo">
         <img src={logo} alt="" />
         <h2>Sign Up</h2>
       </div>
 
       <div className="signupBox">
         <div>
-        <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             placeholder='Enter Username'
@@ -59,7 +61,7 @@ export default function Signup() {
         </div>
 
         <div>
-        <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             value={email}
@@ -69,7 +71,7 @@ export default function Signup() {
         </div>
 
         <div>
-        <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             value={password}
@@ -79,7 +81,7 @@ export default function Signup() {
         </div>
 
         <button
-          onClick={handleSignup} disabled={loading}>{ loading ? "Loading..." : "signup"}</button>
+          onClick={handleSignup} disabled={loading}>{loading ? "Loading..." : "signup"}</button>
       </div>
 
       <div className="loginBox">
