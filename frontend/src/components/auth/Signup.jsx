@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './auth.css'
 import logo from '../../assets/github-mark-white.svg'
-import {useAuth} from '../../authContext.jsx'
+import { useAuth} from '../../authContext.jsx'
+import {Link} from 'react-router-dom'
 
 export default function Signup() {
 
@@ -32,7 +33,9 @@ export default function Signup() {
       window.location.herf = '/'
       
     } catch (error) {
-      console.error('Signup error', error.message)
+      console.error('Signup error', error.message);
+      alert("Signup Failed!")
+      setLoading(false)
     }
   }
 
@@ -47,24 +50,40 @@ export default function Signup() {
       <div className="signupBox">
         <div>
         <label htmlFor="username">Username</label>
-          <input type="text" placeholder='Enter Username' id='username' />
+          <input
+            type="text"
+            placeholder='Enter Username'
+            value={username}
+            id='username'
+            onChange={(e) => setUsername(e.target.value)} />
         </div>
 
         <div>
         <label htmlFor="email">Email</label>
-        <input type="text" placeholder='Enter email' id='email' />
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Enter email'
+            id='email' />
         </div>
 
         <div>
         <label htmlFor="password">Password</label>
-        <input type="password" placeholder='Enter password' id='password' />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Enter password'
+            id='password' />
         </div>
 
-        <button onClick={handleSignup}>Signup</button>
+        <button
+          onClick={handleSignup} disabled={loading}>{ loading ? "Loading..." : "signup"}</button>
       </div>
 
       <div className="loginBox">
-        <p>Already have an account? <a href="/login">Sign in</a></p>
+        <p>Already have an account? <Link to="/auth">Login</Link></p>
 
       </div>
     </div>
