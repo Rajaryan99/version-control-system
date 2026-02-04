@@ -6,8 +6,12 @@ import logo from '../../assets/github-mark-white.svg'
 export default function Signup() {
   return (
     <div className='main'>
+
       <div className="gitLogo"> 
+        <img src={logo} alt="" />
+        <h2>Sign Up</h2>
       </div>
+
       <div className="signupBox">
         <label htmlFor="username">Username</label>
         <input type="text" placeholder='Enter Username' id='username' />
@@ -17,8 +21,11 @@ export default function Signup() {
         <input type="password" placeholder='Enter password' id='password' />
         <button>Signup</button>
       </div>
-      <div className="loginBox"></div>
-      
+
+      <div className="loginBox">
+        <p>Already have an account? <a href="/login">Sign in</a></p>
+
+      </div>
     </div>
   )
 }
