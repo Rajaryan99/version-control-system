@@ -14,18 +14,23 @@ export default function Dashboard() {
     const userId = localStorage.getItem("userId");
 
     const fetchRepositories = async () => {
-      const res = await fetch(`http://localhost:3000/repo/user/${userId}`)
+      try {
+        const res = await fetch(`http://localhost:3000/repo/user/${userId}`);
 
-      const data = await res.json();
-      console.log(data)
-    };
+        const data = await res.json();
+        console.log(data.repo)
+        
+      } catch (error) {
+        console.error("Error while fetching repositories: ", error)
+      }
+    }
 
     fetchRepositories();
   }, [])
 
   return (
     <div>
-      <h1></h1>
+      <h1>Dashboard</h1>
     </div>
   )
 }

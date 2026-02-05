@@ -26,10 +26,13 @@ export default function Signup() {
         username: username
       });
 
+      console.log("SIGNUP RESPONSE:", res.data); //debug
+
+
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.userId);
 
-      setCurrentUser(res.data.userId);
+      setCurrentUser(res.data.userId)
       setLoading(false);
 
       window.location.href = "/"
