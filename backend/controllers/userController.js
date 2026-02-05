@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt, { hashSync } from 'bcryptjs'
-import { MongoClient, ObjectId, ReturnDocument } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 import 'dotenv/config'
 
 
@@ -49,9 +49,9 @@ async function connectClient() {
 
          const result = await userCollection.insertOne(newUser);
 
-         const token = jwt.sign({ id: result.insertId }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" })
+         const token = jwt.sign({ id: result.insertedId }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" })
          
-         res.json({token, userId: result.insertId });
+         res.json({ token, userId: result.insertedId });
          
         
      } catch (error) {
