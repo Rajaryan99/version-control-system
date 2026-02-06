@@ -85,10 +85,10 @@ export default function Dashboard() {
         </div>
         {suggestedSearchResult.map((repo) => (
           <div key={repo._id}>
-            <h4>{repo.name}</h4>
+            <h4><i class="fa-solid fa-link" style={{fontSize:'13px'}}></i> {repo.name}</h4>
             <p>{repo.description}</p>
           </div>
-        ))}
+        ))} 
       </aside>
       <main>
         <h2>Your Repositories</h2>
