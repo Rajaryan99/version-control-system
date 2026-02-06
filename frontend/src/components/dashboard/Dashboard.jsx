@@ -25,7 +25,22 @@ export default function Dashboard() {
       }
     }
 
+    const fetchSuggestedRepositories = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/repo/all`);
+
+        const data = await res.json();
+        console.log(data)
+        setSuggestedRepositories(data.repo);
+        
+        
+      } catch (error) {
+        console.error("Error while fetching repositories: ", error)
+      }
+    }
+
     fetchRepositories();
+    fetchSuggestedRepositories();
   }, [])
 
   return (
