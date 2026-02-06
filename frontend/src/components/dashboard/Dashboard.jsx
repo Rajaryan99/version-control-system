@@ -19,7 +19,7 @@ export default function Dashboard() {
 
         const data = await res.json();
         setRepositories(data.repo);
-        
+
       } catch (error) {
         console.error("Error while fetching repositories: ", error)
       }
@@ -32,8 +32,8 @@ export default function Dashboard() {
         const data = await res.json();
         console.log(data)
         setSuggestedRepositories(data.repo);
-        
-        
+
+
       } catch (error) {
         console.error("Error while fetching repositories: ", error)
       }
@@ -41,11 +41,33 @@ export default function Dashboard() {
 
     fetchRepositories();
     fetchSuggestedRepositories();
-  }, [])
+  }, []);
+
+
+  useEffect(() => {
+
+    if (searchQuery == '') {
+      setSearchResults(repositories)
+    } else {
+      const filteredRepo = repositories.filter((repo) =>
+        repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
+
+  }, [searchQuery, repositories])
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <section className='dashboard'>
+      <aside></aside>
+      <main></main>
+      <aside>
+        <h3>Upcoming Events</h3>
+        <ul>
+          <li><p>Tech Conference - Feb 15</p></li>
+          <li><p>Developer Hackthone - Mar 17</p></li>
+          <li><p>React Summit - Mar 26</p></li>
+        </ul>
+      </aside>
+    </section>
   )
 }
