@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './dashboard.css'
 
 
 export default function Dashboard() {
@@ -31,8 +32,8 @@ export default function Dashboard() {
 
         const data = await res.json();
         console.log(data)
-        setSuggestedRepositories(data.repo);
-
+        setSuggestedRepositories(data);
+        console.log(suggestedRepositories)
 
       } catch (error) {
         console.error("Error while fetching repositories: ", error)
@@ -58,14 +59,28 @@ export default function Dashboard() {
 
   return (
     <section className='dashboard'>
-      <aside></aside>
+      <aside>
+        <h3>Suggested Repositories</h3>
+        {suggestedRepositories.map((repo) => (
+          <div>
+            <h4>{repo.name}</h4>
+            <p>{repo.description}</p>
+          </div>
+        ))}
+      </aside>
       <main></main>
       <aside>
         <h3>Upcoming Events</h3>
         <ul>
-          <li><p>Tech Conference - Feb 15</p></li>
-          <li><p>Developer Hackthone - Mar 17</p></li>
-          <li><p>React Summit - Mar 26</p></li>
+          <li>
+            <p>Tech Conference - Feb 15</p>
+          </li>
+          <li>
+            <p>Developer Hackthone - Mar 17</p>
+          </li>
+          <li>
+            <p>React Summit - Mar 26</p>
+          </li>
         </ul>
       </aside>
     </section>
