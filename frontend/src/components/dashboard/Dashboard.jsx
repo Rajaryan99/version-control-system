@@ -10,6 +10,9 @@ export default function Dashboard() {
   const [suggestedRepositories, setSuggestedRepositories] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
+  const [suggestedSearchQuery, setSuggestedSearchQuery] = useState("")
+  const [suggestedSearchResult, setSuggestedSearchResult] = useState([])
+
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -53,15 +56,34 @@ export default function Dashboard() {
       const filteredRepo = repositories.filter((repo) =>
         repo.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
+
+      setSearchResults(filteredRepo);
     }
 
   }, [searchQuery, repositories])
+  
+  useEffect(() => {
+
+    if (suggestedSearchQuery == '') {
+      setSuggestedSearchResult(suggestedRepositories);
+    } else {
+      const filteredSuggestedRepo = suggestedRepositories.filter((repo) =>
+        repo.name.toLowerCase().includes(suggestedSearchQuery.toLowerCase())
+      )
+
+      setSuggestedSearchResult(filteredSuggestedRepo)
+    }
+
+  }, [suggestedSearchQuery, suggestedRepositories])
 
   return (
     <section className='dashboard'>
       <aside>
         <h3>Suggested Repositories</h3>
-        {suggestedRepositories.map((repo) => (
+        <div className="suggestSearch">
+          <input type="text" placeholder='Search...' value={suggestedSearchQuery} onChange={(e) => setSuggestedSearchQuery(e.target.value)} />
+        </div>
+        {suggestedSearchResult.map((repo) => (
           <div key={repo._id}>
             <h4>{repo.name}</h4>
             <p>{repo.description}</p>
@@ -69,8 +91,11 @@ export default function Dashboard() {
         ))}
       </aside>
       <main>
-        <h3>Your Repositories</h3>
-        {repositories.map((repo) => (
+        <h2>Your Repositories</h2>
+        <div className='search'>
+          <input type="text" value={searchQuery} placeholder='find a repository' onChange={(e) => setSearchQuery(e.target.value)} />
+        </div>
+        {searchResults.map((repo) => (
           <div key={repo._id}>
             <h4>{repo.name}</h4>
             <p>{repo.description}</p>
