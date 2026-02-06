@@ -62,13 +62,21 @@ export default function Dashboard() {
       <aside>
         <h3>Suggested Repositories</h3>
         {suggestedRepositories.map((repo) => (
-          <div>
+          <div key={repo._id}>
             <h4>{repo.name}</h4>
             <p>{repo.description}</p>
           </div>
         ))}
       </aside>
-      <main></main>
+      <main>
+        <h3>Your Repositories</h3>
+        {repositories.map((repo) => (
+          <div key={repo._id}>
+            <h4>{repo.name}</h4>
+            <p>{repo.description}</p>
+          </div>
+        ))}
+      </main>
       <aside>
         <h3>Upcoming Events</h3>
         <ul>
