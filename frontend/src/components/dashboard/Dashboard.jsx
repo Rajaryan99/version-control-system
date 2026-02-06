@@ -18,7 +18,7 @@ export default function Dashboard() {
         const res = await fetch(`http://localhost:3000/repo/user/${userId}`);
 
         const data = await res.json();
-        console.log(data.repo)
+        setRepositories(data.repo);
         
       } catch (error) {
         console.error("Error while fetching repositories: ", error)
