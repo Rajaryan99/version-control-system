@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './dashboard.css'
+import Navbar from '../navbar/Navbar.jsx';
 
 
 export default function Dashboard() {
@@ -77,6 +78,7 @@ export default function Dashboard() {
   }, [suggestedSearchQuery, suggestedRepositories])
 
   return (
+    <><Navbar/>
     <section className='dashboard'>
       <aside>
         <h3>Suggested Repositories</h3>
@@ -116,6 +118,7 @@ export default function Dashboard() {
           </li>
         </ul>
       </aside>
-    </section>
+      </section>
+    </>
   )
 }
