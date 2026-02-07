@@ -7,8 +7,9 @@ import StarIcon from '@mui/icons-material/Star';
 export default function Profile() {
   return (
     <>
-      <Navbar/>
-    <div className='profilepage'>
+     
+      <div className='profilepage'>
+        <Navbar />
 
         <div className="header">
           <div>
@@ -21,7 +22,21 @@ export default function Profile() {
           </div>
         </div>
 
-        
+        <div className='profileDetails'>
+          <div className='imgDiv'>
+            <img src="" alt="" />
+          </div>
+          <h3>UserName</h3>
+
+          <button className='followbtn'>Follow</button>
+
+          <div className='fam'>
+            <p>10 Followers</p>
+            <p>3 Following</p>
+          </div>
+
+
+        </div>
       </div>
     </>
   )
