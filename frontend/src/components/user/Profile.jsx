@@ -5,6 +5,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HeatMapProfile from '../HeatMap.jsx'
 
 export default function Profile() {
 
@@ -66,6 +67,9 @@ fetchUserDetails()
           </div>
 
 
+          <div className="heat-map-section">
+            <HeatMapProfile/>
+          </div>
         </div>
       </div>
     </>
