@@ -6,6 +6,8 @@ import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HeatMapProfile from '../HeatMap.jsx'
+import { useAuth } from '../../authContext.jsx'
+
 
 export default function Profile() {
 
@@ -13,6 +15,9 @@ export default function Profile() {
   const [userDetails, setUserDetails] = useState({
     name: "Username"
   })
+
+    const {  setCurrentUser } = useAuth()
+  
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -51,7 +56,17 @@ fetchUserDetails()
             <StarIcon/>
             <p>Stared Repository</p>
           </div>
-          <button className='logout'>
+          <button className='logout'
+            onClick={() => {
+              
+                  localStorage.removeItem('token')
+                  localStorage.removeItem('userId')
+                 setCurrentUser(null)
+                 
+                 window.location.href = '/auth'
+      
+            }}
+          >
             Logout
           </button>
         </div>
