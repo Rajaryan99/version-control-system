@@ -51,6 +51,10 @@ fetchUserDetails()
             <StarIcon/>
             <p>Stared Repository</p>
           </div>
+          <div>
+            
+            <p>Logout</p>
+          </div>
         </div>
 
         <div className='profileDetails'>
