@@ -46,13 +46,13 @@
 
 
 h2 {
-    margin-top: 10px;
+    margin-top: 17px;
     margin-bottom: 10px;
 }
 
 .repoName {
     display: flex;
-    width: 70%;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
 
@@ -68,7 +68,7 @@ h2 {
 }
 
 .owner .id {
-    background-color: rgb(98, 98, 98);
+    background-color: rgba(199, 198, 198, 0.138);
     height: 40px;
     width: 150px;
     padding: 5px;
@@ -89,16 +89,102 @@ h2 {
 }
 
 .name input {
-    width: 250px;
+    width: 500px;
     height: 40px;
     padding: 5px;
     border-radius: 8px;
-    border: 1px solid rgb(209, 205, 205);
-    background-color: black;
+    border: .5px solid rgb(78, 77, 77);
+    background-color:#0d1117 ;
+    color: #fff;
+    font-size: 18px;
 
 }
 
 .desc {
     margin-bottom: 15px;
         color: #949698;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(197, 196, 196);}
+
+.description label {
+    font-size:18px ;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.description label span {
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.description input {
+    height: 40px;
+    border-radius:8px ;
+    background-color: #0d1117;
+    border: .5px solid rgb(78, 77, 77) ;
+    color: #fff;
+        font-size: 18px;
+        padding: 5px;
+}
+
+.description p {
+    color: #949698;
+    font-weight: lighter;
+    margin-left: 8px;
+    margin-bottom: 25px;
+
+}
+
+.visibility h2{
+    margin-top: 30px;
+
+}
+
+
+
+
+.public label{
+    margin-left: 10px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.public p {
+    margin-left: 20px;
+    color: #949698;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+
+.private label{
+    margin-left: 10px;
+        font-size: 17px;
+        font-weight: 600;
+}
+
+.private p{
+    margin-left: 20px;
+        color: #949698;
+        margin-bottom: 10px;
+        font-style: italic;
+        margin-bottom: 10px;
+}
+
+
+.repobtn{
+    height: 40px;
+    padding: 5px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color:#29903b ;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
 }
