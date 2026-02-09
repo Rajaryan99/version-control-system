@@ -1,10 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './create.css'
 import Navbar from '../navbar/Navbar'
 import BookIcon from '@mui/icons-material/Book';
 import LockOutlineIcon from '@mui/icons-material/LockOutline';
+import axios from 'axios';
 
 export default function Create() {
+
+    const [ownername, setOwnername] = useState("");
+    const [reponame, setreponame] = useState("");
+    const [description, setDescription] = useState("")
+    const [visibility, setVisibility] = useState(true)
+    const [owner, setOwner] = useState("");
+    
+    useEffect(() => {
+            const userId = localStorage.getItem('userId');
+            const fetchUserDetails = async () => {
+
+                if (userId) {
+                    const res = await axios.get(`http://localhost:3000/userProfile/${userId}`)
+                    console.log(res.data)
+                    setOwnername(res.data.username)
+                    setOwner(userId)
+                }
+            }
+      fetchUserDetails()
+        
+    }, [])
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            const res = await axios.post(`http://localhost:3000/repo/create`, {
+                name: reponame,
+                description: description || "",
+                visibility: visibility === "public",
+                owner,
+                content: [],
+                issues: []
+
+            })
+
+            console.log("Reposiotry Created", res.data)
+            alert("Repository created successfully")
+
+            setreponame("")
+            setDescription("")
+            
+        } catch (error) {
+            console.error("error in create repo", error.message);
+            alert("Failed to create repository");
+        }
+    }
     return (
         <div className='newRepo'>
             <Navbar />
@@ -21,12 +70,12 @@ export default function Create() {
                     <div className="repoName">
                         <div className="owner">
                             <p>Owner*</p>
-                            <p className='id'>userid</p>
+                            <p className='id'>{ ownername}</p>
                         </div>
                         
                         <div className='name'>
                             <label htmlFor="repo">Repository name*</label>
-                            <input type="text" name="repo" id="repo" />
+                            <input type="text" name="repo" id="repo" value={reponame} onChange={(e) => setreponame(e.target.value)} />
                         </div>
 
                     </div>
@@ -35,19 +84,19 @@ export default function Create() {
 
                     <div className="description">
                         <label htmlFor="des">Description <span>(optional)</span></label>
-                        <input type="text" name='des' id='des' />
+                        <input type="text" name='des' id='des' value={description}  onChange={(e) => setDescription(e.target.value)}/>
                         <p>0 / 350 character</p>
                     </div>
 
                     <div className="visibility">
                         <h2>Visibility</h2>
                         <div className="public">
-                            <input type="checkbox" id='Visibility' />
+                            <input type="radio" id='Visibility' value="true" checked={visibility === true} onChange={() => setVisibility(true)} />
                             <label htmlFor="visibility">{<BookIcon/>} Public</label>
                             <p>Any one on the internet can see this repository. You choose who can commit.</p>
                         </div>
                         <div className="private">
-                            <input type="checkbox" id='Visibility' />
+                            <input type="radio" id='Visibility' value="false" checked={visibility === false} onChange={() => setVisibility(false)} />
                             <label htmlFor="visibility"> { <LockOutlineIcon/>} Private</label>
                             <p>You choose who can see and commit to this repository.</p>
                         </div>
@@ -56,7 +105,7 @@ export default function Create() {
                     </div>
 
                 </div>
-                <button className='repobtn'>Create repository</button>
+                <button className='repobtn' onClick={handleSubmit}>Create repository</button>
 
 
             </div>
