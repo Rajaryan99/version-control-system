@@ -4,3 +4,101 @@
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+
+.newRepo {
+    height: 100vh;
+    width: 100%;
+    color: #fff;
+    background-color: #0d1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.createRepo {}
+
+.heading {
+    margin-top: 30px;
+    border-bottom: 1px solid rgb(197, 196, 196);
+    padding-bottom: 8px;
+
+}
+
+.heading h1 {
+    margin-bottom: 10px;
+}
+
+.heading p {
+    font-size: 17px;
+    font-weight: lighter;
+    color: #949698;
+    font-style: italic;
+
+}
+
+.heading p a {
+    color: skyblue;
+    text-decoration: underline;
+}
+
+
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.repoName {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.repoName .owner {}
+
+.owner p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+
+}
+
+.owner .id {
+    background-color: rgb(98, 98, 98);
+    height: 40px;
+    width: 150px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid rgb(209, 205, 205);
+
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+}
+
+.name label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.name input {
+    width: 250px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid rgb(209, 205, 205);
+    background-color: black;
+
+}
+
+.desc {
+    margin-bottom: 15px;
+        color: #949698;
+}
