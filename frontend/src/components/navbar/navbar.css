@@ -1,5 +1,6 @@
 *{
     text-decoration: none;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 nav {
@@ -12,7 +13,6 @@ nav {
     background-color: #070a0f;
     position: relative;
     border-bottom: 1px solid rgb(130, 130, 130);
-
 }
 
 

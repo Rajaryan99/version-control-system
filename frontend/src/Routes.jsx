@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard/Dashboard.jsx'
 import Profile from './components/user/Profile.jsx'
 import Signup from './components/auth/Signup.jsx';
 import Login from './components/auth/Login.jsx'
+import Create from "./components/repo/Create.jsx";
 
 
 //auth Context
@@ -51,6 +52,10 @@ const ProjectRoutes = () => {
         {
             path: '/profile',
             element: <Profile/>
+        },
+        {
+            path: '/create',
+            element: <Create/>
         },
     ])
 
