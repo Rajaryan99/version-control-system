@@ -62,7 +62,7 @@ export default function Dashboard() {
     }
 
   }, [searchQuery, repositories])
-  
+
   useEffect(() => {
 
     if (suggestedSearchQuery == '') {
@@ -78,47 +78,49 @@ export default function Dashboard() {
   }, [suggestedSearchQuery, suggestedRepositories])
 
   return (
-    <><Navbar/>
-    <section className='dashboard'>
-      <aside className='leftSection'>
-        <h3>Suggested Repositories</h3>
-        <div className="suggestSearch">
+    <><Navbar />
+      <section className='dashboard'>
+        <aside className='leftSection'>
+          <h3>Suggested Repositories</h3>
+          <div className="suggestSearch">
             <input type="text" placeholder='Search...' value={suggestedSearchQuery} onChange={(e) => setSuggestedSearchQuery(e.target.value)} />
-        </div>
-        {suggestedSearchResult.map((repo) => (
-          <div key={repo._id} className='reponame'>
-            <h4><i class="fa-solid fa-link" style={{fontSize:'13px'}}></i> {repo.name}</h4>
-            <p>{repo.description}</p>
           </div>
-        ))} 
-      </aside>
-      <main className='middleSection'>
-        <h2>Your Repositories</h2>
-        <div className='search'>
-          <input type="text" value={searchQuery} placeholder='find a repository' onChange={(e) => setSearchQuery(e.target.value)} />
-        </div>
-        {searchResults.map((repo) => (
-          <div key={repo._id} className='reponame' id='repoDiv'>
-            <h4><i class="fa-solid fa-link" style={{ fontSize: '13px' }}></i> {repo.name}</h4>
-            <p>{repo.description}</p>
-            <a href="">View repository</a>
+          {suggestedSearchResult.map((repo) => (
+            <div key={repo._id} className='reponame'>
+              <h4><i class="fa-solid fa-link" style={{ fontSize: '13px' }}></i> {repo.name}</h4>
+              <p>{repo.description}</p>
+            </div>
+          ))}
+        </aside>
+        <main className='middleSection'>
+          <h2>Your Repositories</h2>
+          <div className='search'>
+            <input type="text" value={searchQuery} placeholder='find a repository' onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
-        ))}
-      </main>
-      <aside className='rightSection'>
-        <h3>Upcoming Events</h3>
-        <ul>
-          <li>
-            <p>Tech Conference - Feb 15</p>
-          </li>
-          <li>
-            <p>Developer Hackthone - Mar 17</p>
-          </li>
-          <li>
-            <p>React Summit - Mar 26</p>
-          </li>
-        </ul>
-      </aside>
+          {searchResults.map((repo) => (
+            <div key={repo._id} className='reponame' id='repoDiv'>
+              <h4><i class="fa-solid fa-link" style={{ fontSize: '13px' }}></i> {repo.name}</h4>
+              <p>{repo.description}</p>
+              <a href="">View repository</a>
+            </div>
+          ))}
+        </main>
+        <aside className='rightSection'>
+          <h3 id='title'>Upcoming Events</h3>
+
+          <div className='trending'>
+            <h3>Tech Conference - Feb 15</h3>
+            <p>Talks and discussions on the latest technology trends.</p>
+          </div>
+          <div className='trending'>
+          <h3>Developer Hackthone - Mar 17</h3>
+            <p>A fast-paced event to build and showcase innovative projects.</p>
+          </div>
+          <div className='trending'>
+          <h3>React Summit - Mar 26</h3>
+            <p> A focused event on modern React development and best practices.</p>
+          </div>
+        </aside>
       </section>
     </>
   )
