@@ -48,6 +48,8 @@ export default function Create() {
 
             setreponame("")
             setDescription("")
+
+            window.location.href = '/';
             
         } catch (error) {
             console.error("error in create repo", error.message);

@@ -80,31 +80,32 @@ export default function Dashboard() {
   return (
     <><Navbar/>
     <section className='dashboard'>
-      <aside>
+      <aside className='leftSection'>
         <h3>Suggested Repositories</h3>
         <div className="suggestSearch">
-          <input type="text" placeholder='Search...' value={suggestedSearchQuery} onChange={(e) => setSuggestedSearchQuery(e.target.value)} />
+            <input type="text" placeholder='Search...' value={suggestedSearchQuery} onChange={(e) => setSuggestedSearchQuery(e.target.value)} />
         </div>
         {suggestedSearchResult.map((repo) => (
-          <div key={repo._id}>
+          <div key={repo._id} className='reponame'>
             <h4><i class="fa-solid fa-link" style={{fontSize:'13px'}}></i> {repo.name}</h4>
             <p>{repo.description}</p>
           </div>
         ))} 
       </aside>
-      <main>
+      <main className='middleSection'>
         <h2>Your Repositories</h2>
         <div className='search'>
           <input type="text" value={searchQuery} placeholder='find a repository' onChange={(e) => setSearchQuery(e.target.value)} />
         </div>
         {searchResults.map((repo) => (
-          <div key={repo._id}>
-            <h4>{repo.name}</h4>
+          <div key={repo._id} className='reponame' id='repoDiv'>
+            <h4><i class="fa-solid fa-link" style={{ fontSize: '13px' }}></i> {repo.name}</h4>
             <p>{repo.description}</p>
+            <a href="">View repository</a>
           </div>
         ))}
       </main>
-      <aside>
+      <aside className='rightSection'>
         <h3>Upcoming Events</h3>
         <ul>
           <li>
