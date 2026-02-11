@@ -26,7 +26,7 @@ export default function Profile() {
       if (userId) {
         try {
 
-          const res = await axios.get(`http://localhost:3000/userProfile/${userId}`)
+          const res = await axios.get(`https://version-control-system-backend-lhob.onrender.com/userProfile/${userId}`)
           console.log(res)
           setUserDetails(res.data)
           

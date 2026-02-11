@@ -20,7 +20,7 @@ export default function Dashboard() {
 
     const fetchRepositories = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/repo/user/${userId}`);
+        const res = await fetch(`https://version-control-system-backend-lhob.onrender.com/repo/user/${userId}`);
 
         const data = await res.json();
         setRepositories(data.repo);
@@ -32,7 +32,7 @@ export default function Dashboard() {
 
     const fetchSuggestedRepositories = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/repo/all`);
+        const res = await fetch(`https://version-control-system-backend-lhob.onrender.com/repo/all`);
 
         const data = await res.json();
         console.log(data)

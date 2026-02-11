@@ -18,7 +18,7 @@ export default function Create() {
             const fetchUserDetails = async () => {
 
                 if (userId) {
-                    const res = await axios.get(`http://localhost:3000/userProfile/${userId}`)
+                    const res = await axios.get(`https://version-control-system-backend-lhob.onrender.com/userProfile/${userId}`)
                     console.log(res.data)
                     setOwnername(res.data.username)
                     setOwner(userId)
@@ -33,7 +33,7 @@ export default function Create() {
 
         try {
 
-            const res = await axios.post(`http://localhost:3000/repo/create`, {
+            const res = await axios.post(`https://version-control-system-backend-lhob.onrender.com/repo/create`, {
                 name: reponame,
                 description: description || "",
                 visibility: visibility === "public",
